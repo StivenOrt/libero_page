@@ -1,0 +1,233 @@
+/* ===== BANNER PRINCIPAL ===== */
+.banner-principal {
+    position: relative;
+    min-height: 360px;
+    width: 100%;
+    color: #fff;
+    background: linear-gradient(to right, white, rgb(221, 221, 221), orange);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    overflow: hidden;
+    padding: 24px 24px 30px;
+}
+
+.banner-contenido-izq {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    max-width: 780px;
+    width: 100%;
+}
+
+.banner-imagen-wrap {
+    width: 258px;
+    height: 308px;
+    flex-shrink: 0;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+    margin-top: 10px;
+}
+
+.banner-imagen-wrap img {
+    max-height: 110%;
+    max-width: 200%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 190px;
+}
+
+.banner-texto-principal {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-left: 8px;
+    min-width: 0;
+}
+
+.banner-encabezado {
+    margin: 0;
+}
+
+.banner-etiqueta {
+    display: inline-block;
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #000000;
+    border: 1px solid rgb(0, 0, 0);
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.banner-texto-principal h1 {
+    margin: 0;
+    font-size: clamp(1.8rem, 4.8vw, 3rem);
+    line-height: 1.1;
+    color: #000000;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+}
+
+.banner-texto-principal p {
+    margin: 0;
+    font-size: clamp(0.9rem, 1.8vw, 1rem);
+    color: #000000;
+    max-width: 650px;
+    line-height: 1.4;
+}
+
+.banner-datos {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #000000;
+    font-weight: 600;
+    flex-shrink: 0;
+    align-self: flex-start;
+    padding-top: 4px;
+}
+
+.banner-dato-item {
+    background: rgba(255, 115, 0, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 6px 10px;
+    min-width: 160px;
+    text-align: right;
+}
+
+.banner-dato-item strong {
+    display: block;
+    font-size: 0.66rem;
+    color: #000000;
+    opacity: 0.9;
+    margin-bottom: 2px;
+    letter-spacing: 0.06em;
+}
+
+/* ===== TABLET ===== */
+@media (max-width: 1024px) {
+    .banner-principal {
+        flex-wrap: wrap;
+        gap: 16px;
+        padding: 20px 16px 24px;
+        min-height: auto;
+        align-items: flex-start;
+    }
+
+    .banner-contenido-izq {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .banner-imagen-wrap {
+        width: 200px;
+        height: 240px;
+        margin-top: 0;
+    }
+
+    .banner-datos {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: flex-end;
+        width: 100%;
+        gap: 8px;
+    }
+
+    .banner-dato-item {
+        min-width: 140px;
+    }
+}
+
+/* ===== MÓVIL GRANDE ===== */
+@media (max-width: 768px) {
+    .banner-principal {
+        flex-direction: column;
+        padding: 18px 14px 22px;
+        min-height: auto;
+        gap: 14px;
+    }
+
+    .banner-contenido-izq {
+        flex-direction: row;
+        align-items: flex-start;
+        width: 100%;
+        gap: 14px;
+    }
+
+    .banner-imagen-wrap {
+        width: 140px;
+        height: 160px;
+        flex-shrink: 0;
+    }
+
+    .banner-texto-principal {
+        margin-left: 0;
+    }
+
+    .banner-texto-principal h1 {
+        font-size: clamp(1.4rem, 6vw, 2rem);
+    }
+
+    .banner-texto-principal p {
+        font-size: 0.9rem;
+    }
+
+    .banner-datos {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: flex-start;
+        width: 100%;
+        gap: 8px;
+    }
+
+    .banner-dato-item {
+        min-width: calc(50% - 4px);
+        text-align: left;
+        flex: 1 1 calc(50% - 4px);
+    }
+}
+
+/* ===== MÓVIL PEQUEÑO ===== */
+@media (max-width: 480px) {
+    .banner-principal {
+        padding: 14px 10px 18px;
+    }
+
+    .banner-contenido-izq {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .banner-imagen-wrap {
+        width: 120px;
+        height: 120px;
+    }
+
+    .banner-texto-principal h1 {
+        font-size: clamp(1.3rem, 9vw, 1.8rem);
+    }
+
+    .banner-dato-item {
+        min-width: 100%;
+        flex: 1 1 100%;
+    }
+}

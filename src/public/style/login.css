@@ -1,0 +1,85 @@
+body{
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background: linear-gradient(to top, orange, white);
+
+}
+
+.login-box{
+    width:650px;
+    height: 400px;
+    background:white;
+    padding:50px;
+    border-radius:10px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.2);
+    font-family: 'Arial Black', sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border: 1px solid black;
+}
+
+.login-box form {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.login-box button{
+    width:100%;
+    padding:10px;
+    background:#ffae00;
+    color:rgb(0, 0, 0);
+    border: 1px solid black;
+    border-radius:5px;
+    font-size:16px;
+    cursor:pointer;
+    transition: background 0.3s ease;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin-top: auto;
+}
+
+.login-box input {
+    font-family: Arial, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+}
+
+.login-box input::placeholder {
+    color: rgba(0, 0, 0, 0.35);
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+    opacity: 1;
+}
+
+.logo{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    background:#eee;
+    margin:auto;
+    margin-bottom:15px;
+}
+
+.back-arrow {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #000000;
+    text-decoration: none;
+    z-index: 1000;
+    transition: color 0.3s ease;
+}
+
+.back-arrow:hover {
+    color: #333333;
+}
+
+.mb-3 .form-control {
+    font-family:'Times New Roman', Times, serif;
+    font-weight: 400;
+}
