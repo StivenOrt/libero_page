@@ -9,13 +9,13 @@ import { UpdateUserDto } from 'src/dto/users/update-user.dto';
 @Injectable()
 export class UsersService {
     private readonly saltRounds = 10;
-   constructor(
+    constructor(
         @InjectRepository(UsersEntity)
         private readonly clienteRepository: Repository<UsersEntity>,
-    ) { } 
+    ) { }
 
     async findAll(): Promise<UsersEntity[]> {
-        const clientes =  await this.clienteRepository.find();
+        const clientes = await this.clienteRepository.find();
         return clientes;
     }
 

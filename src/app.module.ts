@@ -4,9 +4,9 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
 import { LoginModule } from './modules/login.module';
-import { RoutesModule } from './routes/routes/routes.module';
+import { PostulacionModule } from './modules/postulacion.module';
 import { UsersModule } from './modules/users.module';
-
+import { RoutesModule } from './routes/routes.module';
 
 @Module({
   imports: [
@@ -15,11 +15,12 @@ import { UsersModule } from './modules/users.module';
       envFilePath: '.env',
     }),
     DatabaseModule,
-    UsersModule,
     LoginModule,
+    PostulacionModule,
+    UsersModule,
     RoutesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
