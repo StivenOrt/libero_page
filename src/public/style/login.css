@@ -1,190 +1,404 @@
+/* ═══════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: url('../images/mountain.jpg');
-background-size: 90%;
-    background-position: center;
-    font-family: 'Arial Black', sans-serif;
-    overflow: hidden;
-    background-repeat: no-repeat;
+  min-height: 100vh;
+  font-family: 'Plus Jakarta Sans', 'Segoe UI', sans-serif;
+  background-color: #fafaf8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #111;
 }
 
-/* ── Contenedor que agrupa login + registro ── */
-.auth-wrapper {
-    display: flex;
-    align-items: flex-start;
-    gap: 0;
-    position: relative;
+/* ═══════════════════════════════════════
+   HEADER SESIÓN ACTIVA
+═══════════════════════════════════════ */
+.session-header {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background: rgba(8, 22, 48, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,174,0,0.15);
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+  transition: opacity .3s, transform .3s;
+}
+.session-header.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
 }
 
-/* ── Caja login ── */
-.login-box {
-    width: 420px;
-    background: white;
-    padding: 44px 40px 36px;
-    border-radius: 10px;
-    box-shadow: 0 5px 28px rgba(0,0,0,0.25);
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.4s ease, border-radius 0.4s ease;
-    position: relative;
-    z-index: 2;
+.session-back {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: none;
+  border: none;
+  color: #ffae00;
+  font-family: inherit;
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .4px;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity .2s;
+}
+.session-back:hover { opacity: .7; }
+
+.session-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: .8rem;
+  color: #adc0dc;
+}
+.session-user { color: #fff; font-weight: 600; }
+
+/* ═══════════════════════════════════════
+   CHIP LIVE
+═══════════════════════════════════════ */
+.chip-live {
+  background: #e8173a;
+  color: #fff;
+  font-size: .62rem;
+  font-weight: 800;
+  letter-spacing: .8px;
+  border-radius: 999px;
+  padding: .18rem .5rem;
+  vertical-align: middle;
 }
 
-/* Cuando el panel de registro está abierto, el login se corre un poco a la izquierda */
-.login-box.shifted {
-    border-radius: 10px 0 0 10px;
-    box-shadow: none;
+/* ═══════════════════════════════════════
+   FLECHA SALIR
+═══════════════════════════════════════ */
+.exit-arrow {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 40;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.36);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+  transition: background .2s;
+}
+.exit-arrow:hover { background: rgba(0,0,0,0.56); }
+
+/* ═══════════════════════════════════════
+   STAGE (centra la card)
+═══════════════════════════════════════ */
+.stage {
+  width: 100%;
+  padding: 24px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
 }
 
-/* ── Panel de registro ── */
-.register-box {
-    width: 380px;
-    background: #1a1a1a;
-    color: #e8e0d4;
-    padding: 44px 36px 36px;
-    border-radius: 0 10px 10px 0;
-    box-shadow: 6px 5px 28px rgba(0,0,0,0.35);
-    display: flex;
-    flex-direction: column;
-    position: relative;
-
-    /* Estado inicial: oculto a la izquierda, detrás del login */
-    transform: translateX(-100%);
-    opacity: 0;
-    pointer-events: none;
-    transition: transform 0.4s ease, opacity 0.35s ease;
-    z-index: 1;
+/* ═══════════════════════════════════════
+   CARD PRINCIPAL (split layout)
+═══════════════════════════════════════ */
+.card {
+  display: flex;
+  width: min(100%, 880px);
+  min-height: 520px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 10px 32px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.07);
+  transition: min-height .35s ease;
 }
+.card.card-tall { min-height: 620px; }
 
-.register-box.visible {
-    transform: translateX(0);
-    opacity: 1;
-    pointer-events: all;
-}
-
-.register-box h4 {
-    color: #e8e0d4;
-    letter-spacing: 2px;
+/* ═══════════════════════════════════════
+   LADO IZQUIERDO: formularios
+═══════════════════════════════════════ */
+.forms-side {
+  flex: 1;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 48px 44px;
+  position: relative;
+  min-width: 0;
 }
 
-.register-box .form-label {
-    color: #aaa;
-    font-size: 0.7rem;
-    letter-spacing: 2px;
+/* ═══════════════════════════════════════
+   PANELES (login / registro)
+═══════════════════════════════════════ */
+.pane {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  animation: none;
 }
 
-.register-box .form-control {
-    background: #2a2a2a;
-    border: 1px solid #3a3a3a;
-    color: #e8e0d4;
-    font-family: Arial, sans-serif;
-    font-size: 0.88rem;
+.pane-enter {
+  animation: slideIn .32s cubic-bezier(.4,0,.2,1) forwards;
+}
+.pane-exit {
+  animation: slideOut .18s ease forwards;
 }
 
-.register-box .form-control::placeholder {
-    color: rgba(255,255,255,0.25);
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(18px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideOut {
+  from { opacity: 1; transform: translateX(0); }
+  to   { opacity: 0; transform: translateX(-14px); }
 }
 
-.register-box .form-control:focus {
-    background: #2a2a2a;
-    border-color: #c87941;
-    color: #e8e0d4;
-    box-shadow: 0 0 0 2px rgba(200,121,65,0.2);
+/* brand */
+.pane-brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-bottom: 22px;
+}
+.brand-name {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0b3460;
+  letter-spacing: .3px;
 }
 
-/* Botón cerrar (✕) */
-.close-btn {
-    position: absolute;
-    top: 14px;
-    right: 16px;
-    background: none;
-    border: none;
-    color: #555;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: color 0.2s;
-    line-height: 1;
-    padding: 4px 6px;
-}
-.close-btn:hover { color: #c87941; }
-
-/* ── Botones principales ── */
-.btn-principal {
-    display: block;
-    width: 100%;
-    padding: 11px;
-    background: #ffae00;
-    color: #000;
-    border: none;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    letter-spacing: 1px;
-    cursor: pointer;
-    margin-top: auto;
-    transition: background 0.25s ease;
-}
-.btn-principal:hover { background: #e09900; }
-
-/* Botón de registro (outline) */
-.btn-registro {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background: transparent;
-    color: #c87941;
-    border: 2px solid #c87941;
-    border-radius: 5px;
-    font-size: 0.85rem;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    letter-spacing: 1px;
-    cursor: pointer;
-    transition: background 0.25s ease, color 0.25s ease;
-}
-.btn-registro:hover {
-    background: #c87941;
-    color: #fff;
+.pane-title {
+  font-size: clamp(1.6rem, 4vw, 2.1rem);
+  font-weight: 800;
+  color: #0a2240;
+  letter-spacing: -.3px;
+  line-height: 1.15;
+  margin-bottom: 6px;
 }
 
-/* Divisor */
-.divider {
-    text-align: center;
-    font-size: 0.7rem;
-    color: #bbb;
-    letter-spacing: 1px;
-    margin: 18px 0 10px;
-    font-family: Arial, sans-serif;
-    font-weight: 400;
+.pane-sub {
+  font-size: .85rem;
+  color: #7a85a0;
+  margin-bottom: 26px;
+  line-height: 1.5;
 }
 
-/* ── Inputs login ── */
-.login-box .form-control {
-    font-family: Arial, sans-serif;
-    font-size: 0.88rem;
+/* botón "volver" registro */
+.back-pane {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  color: #5f6a85;
+  font-family: inherit;
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .3px;
+  cursor: pointer;
+  padding: 0;
+  transition: color .2s;
 }
-.login-box .form-control::placeholder {
-    color: rgba(0,0,0,0.3);
-    font-size: 0.85rem;
-}
-.login-box .form-label {
-    font-size: 0.7rem;
-    letter-spacing: 2px;
+.back-pane:hover { color: #0a2240; }
+
+/* ═══════════════════════════════════════
+   FORMULARIO
+═══════════════════════════════════════ */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
-/* ── Flecha volver ── */
-.back-arrow {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    font-size: 28px;
-    font-weight: 700;
-    color: #fff;
-    text-shadow: 0 1px 6px rgba(0,0,0,0.5);
-    text-decoration: none;
-    z-index: 1000;
-    transition: color 0.3s ease;
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
-.back-arrow:hover { color: #ffae00; }
+.field label {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .7px;
+  color: #8590ac;
+  text-transform: uppercase;
+}
+.field input {
+  height: 44px;
+  border: 1.5px solid #e0e5f2;
+  border-radius: 10px;
+  padding: 0 14px;
+  font-size: .9rem;
+  font-family: inherit;
+  color: #111;
+  background: #f8f9fd;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+.field input::placeholder { color: #b0b8cc; }
+.field input:hover { border-color: #c5cde0; }
+.field input:focus {
+  outline: none;
+  border-color: #ffae00;
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(255,174,0,.12);
+}
+
+.btn-main {
+  height: 46px;
+  border: none;
+  border-radius: 10px;
+  background: #ffae00;
+  color: #1a0f00;
+  font-size: .9rem;
+  font-family: inherit;
+  font-weight: 800;
+  letter-spacing: .4px;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: background .2s, transform .15s, box-shadow .2s;
+}
+.btn-main:hover {
+  background: #e39a00;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(255,174,0,.28);
+}
+.btn-main:active { transform: translateY(0); }
+
+.switch-text {
+  margin-top: 18px;
+  font-size: .82rem;
+  color: #8590ac;
+  text-align: center;
+}
+.btn-link {
+  background: none;
+  border: none;
+  color: #0b5ea8;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  transition: color .2s;
+}
+.btn-link:hover { color: #ffae00; }
+
+/* ═══════════════════════════════════════
+   LADO DERECHO: acento / ilustración
+═══════════════════════════════════════ */
+.accent-side {
+  flex: 0 0 42%;
+  background: linear-gradient(145deg, #1a3f7a 0%, #0d2349 55%, #111e3a 100%);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.accent-inner {
+  position: relative;
+  z-index: 2;
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+/* burbujas de fondo */
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(48px);
+  pointer-events: none;
+}
+.orb-1 {
+  width: 200px; height: 200px;
+  background: rgba(255,174,0,.14);
+  top: -40px; right: -40px;
+}
+.orb-2 {
+  width: 160px; height: 160px;
+  background: rgba(26,90,180,.25);
+  bottom: 0px; left: -30px;
+}
+.orb-3 {
+  width: 100px; height: 100px;
+  background: rgba(255,80,120,.1);
+  bottom: 30%; right: 10%;
+}
+
+/* ilustración */
+.illo {
+  width: min(220px, 72%);
+  height: auto;
+  filter: drop-shadow(0 12px 32px rgba(0,0,0,0.3));
+}
+
+/* texto acento */
+.accent-copy h2 {
+  font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -.2px;
+  margin-bottom: 8px;
+  transition: opacity .3s;
+}
+.accent-copy p {
+  font-size: .82rem;
+  color: rgba(200,215,240,.8);
+  line-height: 1.6;
+  max-width: 200px;
+  margin: 0 auto;
+  transition: opacity .3s;
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+
+/* Tablet: oculta el panel derecho, centra el izquierdo */
+@media (max-width: 700px) {
+  .accent-side { display: none; }
+
+  .card {
+    width: min(100%, 420px);
+    min-height: auto;
+    border-radius: 20px;
+  }
+
+  .forms-side {
+    padding: 36px 28px;
+  }
+}
+
+/* Móvil pequeño */
+@media (max-width: 400px) {
+  .forms-side { padding: 28px 18px; }
+  .pane-title { font-size: 1.5rem; }
+}
+
+/* Pantalla intermedia: ajuste de padding */
+@media (min-width: 701px) and (max-width: 860px) {
+  .forms-side { padding: 36px 28px; }
+  .accent-side { flex: 0 0 38%; }
+}
