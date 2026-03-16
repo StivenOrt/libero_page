@@ -3,15 +3,19 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { LoginModule } from './modules/login.module';
 import { DatabaseModule } from './database/database.module';
-import { TypeOrmModule } from '@nestjs/typeorm/dist/typeorm.module';
-import { ConfigModule } from '@nestjs/config/dist/config.module';
+import { ConfigModule } from '@nestjs/config';
+import { PostulacionModule } from './modules/postulacion.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([]),
+  imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
-    }),LoginModule, DatabaseModule],
+    }),
+    DatabaseModule,
+    LoginModule,
+    PostulacionModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
