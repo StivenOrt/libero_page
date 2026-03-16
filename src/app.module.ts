@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { LoginModule } from './modules/login.module';
 import { DatabaseModule } from './database/database.module';
-import { ConfigModule } from '@nestjs/config';
+import { LoginModule } from './modules/login.module';
 import { PostulacionModule } from './modules/postulacion.module';
+import { UsersModule } from './modules/users/users.module';
+import { RoutesModule } from './routes/routes/routes.module';
 
 @Module({
   imports: [
@@ -15,6 +17,8 @@ import { PostulacionModule } from './modules/postulacion.module';
     DatabaseModule,
     LoginModule,
     PostulacionModule,
+    UsersModule,
+    RoutesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
