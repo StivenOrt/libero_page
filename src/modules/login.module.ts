@@ -2,11 +2,11 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { UsersEntity } from '../../entities/users/user.entity';
-import { RolesEntity } from '../../entities/roles/rol.entity';
-import { LoginService } from '../../services/login/login.service';
-import { LoginController } from '../../controllers/login/login.controller';
-import { UsersModule } from '../users/users.module';
+import { UsersEntity } from '../entities/user.entity';
+import { RolesEntity } from '../entities/rol.entity';
+import { LoginService } from '../services/login.service';
+import { LoginController } from '../controllers/login.controller';
+import { UsersModule } from './users.module';
 
 @Module({
   imports: [

@@ -6,7 +6,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { PostulacionService } from '../../services/postulaciones/postulacion.service';
-import { CreatePostulacionDto } from '../../dto/postulacion/create-postulacion.dto';
+import { CreatePostulacionDto } from '../dto/postulacion/create-postulacion.dto';
 
 @Controller('postulaciones')
 export class PostulacionController {

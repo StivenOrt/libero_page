@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
-import { UsersEntity } from 'src/entities/users/user.entity';
+import { UsersEntity } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from 'src/dto/users/create-user.dto';
 import { UpdateUserDto } from 'src/dto/users/update-user.dto';
@@ -9,13 +9,13 @@ import { UpdateUserDto } from 'src/dto/users/update-user.dto';
 @Injectable()
 export class UsersService {
     private readonly saltRounds = 10;
-   constructor(
+    constructor(
         @InjectRepository(UsersEntity)
         private readonly clienteRepository: Repository<UsersEntity>,
-    ) { } 
+    ) { }
 
     async findAll(): Promise<UsersEntity[]> {
-        const clientes =  await this.clienteRepository.find();
+        const clientes = await this.clienteRepository.find();
         return clientes;
     }
 

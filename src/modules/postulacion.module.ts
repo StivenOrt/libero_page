@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Postulacion } from '../../entities/postulaciones/postulacion.entity';
+import { Postulacion } from '../entities/postulacion.entity';
 import { PostulacionService } from '../../services/postulaciones/postulacion.service';
-import { PostulacionController } from '../../controllers/postulaciones/postulacion.controller';
+import { PostulacionController } from '../controllers/postulacion.controller';
 
 @Module({
     imports: [TypeOrmModule.forFeature([Postulacion])],
