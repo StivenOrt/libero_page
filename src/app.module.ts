@@ -6,7 +6,7 @@ import { DatabaseModule } from './database/database.module';
 import { LoginModule } from './modules/login.module';
 import { PostulacionModule } from './modules/postulacion.module';
 import { UsersModule } from './modules/users.module';
-import { RoutesModule } from './routes/routes.module';
+import { RoutesModule } from './modules/route.module';
 
 @Module({
   imports: [

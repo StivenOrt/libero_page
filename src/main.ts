@@ -5,12 +5,15 @@ import { join } from 'path';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
-  app.setGlobalPrefix('api');
+  app.setGlobalPrefix('api', {
+    exclude: ['/', 'login' ]
+  });
   app.enableCors();
-  app.useStaticAssets(join(__dirname, '..', 'src', 'public'), {
+  app.useStaticAssets( join(process.cwd(), 'src', 'public'), {
     prefix: '/',
   });
-  await app.listen(3000);
-  console.log('NestJS corriendo en puerto 3000');
+
+  await app.listen(3001);
+  console.log('NestJS corriendo en puerto 3001');
 }
 bootstrap();
