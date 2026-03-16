@@ -1,9 +1,38 @@
-.header-libero{
+.header-libero {
     background-color: #fdfcfc;
-    
     padding: 10px;
-    position: relative;
-    overflow: hidden;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: padding 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header-libero.scrolled {
+    padding: 4px 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+}
+
+.header-libero.scrolled .logo-space {
+    width: 48px;
+    height: 48px;
+}
+
+.header-libero.scrolled .title-libero,
+.header-libero.scrolled .subtitle-libero {
+    font-size: 18px;
+}
+
+.header-libero.scrolled .slogan {
+    display: none;
+}
+
+.logo-space {
+    transition: width 0.3s ease, height 0.3s ease;
+}
+
+.title-libero,
+.subtitle-libero {
+    transition: font-size 0.3s ease;
 }
 
 .header-libero::before{

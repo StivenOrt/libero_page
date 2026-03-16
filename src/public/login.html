@@ -14,27 +14,63 @@
 
 <a href="index.html" class="back-arrow">←</a>
 
-<div class="login-box">
+<div class="auth-wrapper">
 
-
-<h4 class="text-center mb-4">INICIAR SESIÓN</h4>
+  <!-- CAJA LOGIN -->
+  <div class="login-box" id="loginBox">
+    <h4 class="text-center mb-4">INICIAR SESIÓN</h4>
     <form action="/login" method="POST">
-
-        <div class="mb-3">
-            <label class="form-label">CORREO</label>
-            <input type="email" class="form-control" name="correo" placeholder="correoejemplo@gmail.com" required>
-        </div>
-
-        <div class="mb-3">
+      <div class="mb-3">
+        <label class="form-label">CORREO</label>
+        <input type="email" class="form-control" name="correo" placeholder="correoejemplo@gmail.com" required>
+      </div>
+      <div class="mb-3">
         <label class="form-label">CONTRASEÑA</label>
-            <input type="password" class="form-control" name="password" placeholder="P@sswordExampl3" required>
-        </div>
-
-        <button class="btn btn-warning w-100">INGRESAR</button>
-
+        <input type="password" class="form-control" name="password" placeholder="P@sswordExampl3" required>
+      </div>
+      <button type="submit" class="btn-principal w-100">INGRESAR</button>
     </form>
+    <div class="divider">¿No tienes cuenta?</div>
+    <button class="btn-registro w-100" onclick="abrirRegistro()">REGISTRARSE</button>
+  </div>
+
+  <!-- PANEL REGISTRO (aparece a la derecha) -->
+  <div class="register-box" id="registerBox">
+    <button class="close-btn" onclick="cerrarRegistro()">✕</button>
+    <h4 class="text-center mb-4">CREAR CUENTA</h4>
+    <form action="/register" method="POST">
+      <div class="mb-3">
+        <label class="form-label">NOMBRE COMPLETO</label>
+        <input type="text" class="form-control" name="nombre" placeholder="Tu nombre" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">CORREO</label>
+        <input type="email" class="form-control" name="correo" placeholder="correoejemplo@gmail.com" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">CONTRASEÑA</label>
+        <input type="password" class="form-control" name="password" placeholder="P@sswordExampl3" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">CONFIRMAR CONTRASEÑA</label>
+        <input type="password" class="form-control" name="password2" placeholder="Repite tu contraseña" required>
+      </div>
+      <button type="submit" class="btn-principal w-100">CREAR CUENTA</button>
+    </form>
+  </div>
 
 </div>
+
+<script>
+  function abrirRegistro() {
+    document.getElementById('registerBox').classList.add('visible');
+    document.getElementById('loginBox').classList.add('shifted');
+  }
+  function cerrarRegistro() {
+    document.getElementById('registerBox').classList.remove('visible');
+    document.getElementById('loginBox').classList.remove('shifted');
+  }
+</script>
 
 </body>
 </html>

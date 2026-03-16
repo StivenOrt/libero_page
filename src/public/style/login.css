@@ -1,85 +1,190 @@
-body{
-    height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background: linear-gradient(to top, orange, white);
-
-}
-
-.login-box{
-    width:650px;
-    height: 400px;
-    background:white;
-    padding:50px;
-    border-radius:10px;
-    box-shadow:0 5px 20px rgba(0,0,0,0.2);
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../images/mountain.jpg');
+background-size: 90%;
+    background-position: center;
     font-family: 'Arial Black', sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    border: 1px solid black;
+    overflow: hidden;
+    background-repeat: no-repeat;
 }
 
-.login-box form {
+/* ── Contenedor que agrupa login + registro ── */
+.auth-wrapper {
     display: flex;
-    flex-direction: column;
-    flex: 1;
+    align-items: flex-start;
+    gap: 0;
+    position: relative;
 }
 
-.login-box button{
-    width:100%;
-    padding:10px;
-    background:#ffae00;
-    color:rgb(0, 0, 0);
-    border: 1px solid black;
-    border-radius:5px;
-    font-size:16px;
-    cursor:pointer;
-    transition: background 0.3s ease;
+/* ── Caja login ── */
+.login-box {
+    width: 420px;
+    background: white;
+    padding: 44px 40px 36px;
+    border-radius: 10px;
+    box-shadow: 0 5px 28px rgba(0,0,0,0.25);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.4s ease, border-radius 0.4s ease;
+    position: relative;
+    z-index: 2;
+}
+
+/* Cuando el panel de registro está abierto, el login se corre un poco a la izquierda */
+.login-box.shifted {
+    border-radius: 10px 0 0 10px;
+    box-shadow: none;
+}
+
+/* ── Panel de registro ── */
+.register-box {
+    width: 380px;
+    background: #1a1a1a;
+    color: #e8e0d4;
+    padding: 44px 36px 36px;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 6px 5px 28px rgba(0,0,0,0.35);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    /* Estado inicial: oculto a la izquierda, detrás del login */
+    transform: translateX(-100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.4s ease, opacity 0.35s ease;
+    z-index: 1;
+}
+
+.register-box.visible {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: all;
+}
+
+.register-box h4 {
+    color: #e8e0d4;
+    letter-spacing: 2px;
+}
+
+.register-box .form-label {
+    color: #aaa;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+}
+
+.register-box .form-control {
+    background: #2a2a2a;
+    border: 1px solid #3a3a3a;
+    color: #e8e0d4;
+    font-family: Arial, sans-serif;
+    font-size: 0.88rem;
+}
+
+.register-box .form-control::placeholder {
+    color: rgba(255,255,255,0.25);
+}
+
+.register-box .form-control:focus {
+    background: #2a2a2a;
+    border-color: #c87941;
+    color: #e8e0d4;
+    box-shadow: 0 0 0 2px rgba(200,121,65,0.2);
+}
+
+/* Botón cerrar (✕) */
+.close-btn {
+    position: absolute;
+    top: 14px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: #555;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.2s;
+    line-height: 1;
+    padding: 4px 6px;
+}
+.close-btn:hover { color: #c87941; }
+
+/* ── Botones principales ── */
+.btn-principal {
+    display: block;
+    width: 100%;
+    padding: 11px;
+    background: #ffae00;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9rem;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    letter-spacing: 1px;
+    cursor: pointer;
     margin-top: auto;
+    transition: background 0.25s ease;
+}
+.btn-principal:hover { background: #e09900; }
+
+/* Botón de registro (outline) */
+.btn-registro {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background: transparent;
+    color: #c87941;
+    border: 2px solid #c87941;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease;
+}
+.btn-registro:hover {
+    background: #c87941;
+    color: #fff;
 }
 
-.login-box input {
+/* Divisor */
+.divider {
+    text-align: center;
+    font-size: 0.7rem;
+    color: #bbb;
+    letter-spacing: 1px;
+    margin: 18px 0 10px;
     font-family: Arial, sans-serif;
     font-weight: 400;
-    letter-spacing: 0.02em;
 }
 
-.login-box input::placeholder {
-    color: rgba(0, 0, 0, 0.35);
+/* ── Inputs login ── */
+.login-box .form-control {
     font-family: Arial, sans-serif;
-    font-size: 0.9rem;
-    opacity: 1;
+    font-size: 0.88rem;
+}
+.login-box .form-control::placeholder {
+    color: rgba(0,0,0,0.3);
+    font-size: 0.85rem;
+}
+.login-box .form-label {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
 }
 
-.logo{
-    width:70px;
-    height:70px;
-    border-radius:50%;
-    background:#eee;
-    margin:auto;
-    margin-bottom:15px;
-}
-
+/* ── Flecha volver ── */
 .back-arrow {
     position: fixed;
     top: 20px;
     left: 20px;
     font-size: 28px;
     font-weight: 700;
-    color: #000000;
+    color: #fff;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.5);
     text-decoration: none;
     z-index: 1000;
     transition: color 0.3s ease;
 }
-
-.back-arrow:hover {
-    color: #333333;
-}
-
-.mb-3 .form-control {
-    font-family:'Times New Roman', Times, serif;
-    font-weight: 400;
-}
+.back-arrow:hover { color: #ffae00; }
