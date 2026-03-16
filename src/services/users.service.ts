@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
-import { UsersEntity } from 'src/entities/users/user.entity';
+import { UsersEntity } from 'src/entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateUserDto } from 'src/dto/users/create-user.dto';
 import { UpdateUserDto } from 'src/dto/users/update-user.dto';
