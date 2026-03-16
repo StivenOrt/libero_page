@@ -1,0 +1,205 @@
+.banner-new {
+    width: 100%;
+    min-height: 240px;
+    background-image: url("../images/Cielo.avif");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-top: 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.banner-new::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.28);
+}
+
+.banner-new-text {
+    position: relative;
+    z-index: 1;
+    color: white;
+    text-align: center;
+    max-width: 900px;
+    padding: 16px;
+}
+
+.banner-new-text h1 {
+    margin: 0;
+    font-size: clamp(1.4rem, 4vw, 2.25rem);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.banner-new-text p {
+    margin-top: 8px;
+    font-size: clamp(0.85rem, 2.2vw, 1rem);
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.years-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 16px auto 10px;
+    max-width: 900px;
+    padding: 0 12px;
+}
+
+.years-pill {
+    padding: 10px 16px;
+    border-radius: 8px;
+    border: 1px solid #e5e5e5;
+    background: #f7f7f7;
+    color: #333;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.years-pill:hover,
+.years-pill.active {
+    background: #ff8800;
+    color: #fff;
+    border-color: #000000;
+}
+
+.news-list {
+    max-width: 1100px;
+    margin: 0 auto 28px;
+    padding: 0 12px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.news-card {
+    display: flex;
+    flex-wrap: nowrap;
+    border: 1px solid #e1e1e1;
+    border-radius: 12px;
+    background: #fff;
+    overflow: hidden;
+    min-height: 170px;
+}
+
+.news-date {
+    min-width: 90px;
+    background: #f8f8f8;
+    border-right: 1px solid #ececec;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 8px;
+    text-align: center;
+    gap: 4px;
+}
+
+.news-date .day {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+    color: #000;
+}
+
+.news-date .month {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: #333;
+}
+
+.news-content {
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+}
+
+.news-content h2 {
+    margin: 0;
+    font-size: clamp(1rem, 1.9vw, 1.25rem);
+    line-height: 1.2;
+    color: #1d1d1d;
+}
+
+.news-content p {
+    margin: 0;
+    color: #373737;
+    font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+    line-height: 1.35;
+}
+
+@media (max-width: 1024px) {
+    .news-list {
+        grid-template-columns: 1fr;
+    }
+    .news-card {
+        min-height: auto;
+    }
+    .news-date {
+        min-width: 84px;
+        padding: 10px 6px;
+    }
+}
+
+@media (max-width: 768px) {
+    .banner-new {
+        min-height: 190px;
+    }
+    .years-row {
+        justify-content: flex-start;
+    }
+}
+
+.pagination-row {
+    max-width: 1100px;
+    margin: 0 auto 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 0 12px;
+    position: relative;
+    bottom: 0;
+}
+
+.page-control-btn {
+    border: 1px solid #cecece;
+    border-radius: 8px;
+    background: #fff;
+    color: #222;
+    cursor: pointer;
+    font-weight: 700;
+    padding: 6px 12px;
+    letter-spacing: 0.02em;
+    min-width: 46px;
+}
+
+.page-control-btn:hover {
+    border-color: #ff8800;
+    color: #ff8800;
+}
+
+.page-label {
+    align-self: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin: 0 10px;
+    white-space: nowrap;
+}
+
+.page-2 {
+    display: none;
+}
