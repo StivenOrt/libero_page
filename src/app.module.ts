@@ -1,18 +1,24 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { LoginModule } from './modules/login.module';
 import { DatabaseModule } from './database/database.module';
-import { TypeOrmModule } from '@nestjs/typeorm/dist/typeorm.module';
-import { ConfigModule } from '@nestjs/config/dist/config.module';
+import { LoginModule } from './modules/login/login.module';
 import { RoutesModule } from './routes/routes/routes.module';
+import { UsersModule } from './modules/users/users.module';
+
 
 @Module({
-  imports: [TypeOrmModule.forFeature([]),
+  imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: '.env',
-    }),LoginModule, DatabaseModule, RoutesModule],
+    }),
+    DatabaseModule,
+    UsersModule,
+    LoginModule,
+    RoutesModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
