@@ -12,11 +12,10 @@ export class RoutesController {
     res.sendFile(this.RoutesService.getIndex())
   }
 
-  @Get("login")
+  @Get('login')
   login(@Res() res: Response) {
     res.sendFile(this.RoutesService.getLogin())
   }
 
-  
 
 }

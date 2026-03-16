@@ -14,5 +14,4 @@ export class RoutesService {
     return join(PUBLIC, "login.html")
   }
 
-
 }
