@@ -17,8 +17,8 @@ async function bootstrap() {
 
   app.useGlobalFilters(new NotFoundFilter())
 
-  await app.listen(3001);
-  console.log('NestJS corriendo en puerto 3001');
+  await app.listen(82);
+  console.log('NestJS corriendo en http://localhost:82');
 
 
 }
