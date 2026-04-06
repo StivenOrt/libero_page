@@ -169,7 +169,7 @@ SHOW TABLES;
 
 DESC perfiles;
 
-SELECT 
+SELECT
 usuarios.id,
 usuarios.username,
 roles.nombre AS rol
