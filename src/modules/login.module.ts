@@ -7,6 +7,7 @@ import { RolesEntity } from '../entities/rol.entity';
 import { LoginService } from '../services/login.service';
 import { LoginController } from '../controllers/login.controller';
 import { UsersModule } from './users.module';
+import { JwtStrategy } from '../strategies/jwt.strategy';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { UsersModule } from './users.module';
       }),
     }),
   ],
-  providers: [LoginService],
+  providers: [LoginService, JwtStrategy],
   controllers: [LoginController],
 })
 export class LoginModule { }
