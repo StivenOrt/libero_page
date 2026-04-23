@@ -5,6 +5,7 @@
 src/public/uploads/
 
 # Logs
+log.txt
 logs
 *.log
 npm-debug.log*
