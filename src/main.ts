@@ -40,6 +40,13 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
+
+  Object.values(document.paths).forEach((path: any) => {
+    Object.values(path).forEach((method: any) => {
+      method.security = [{ 'access-token': [] }];
+    });
+  });
+
   SwaggerModule.setup('api/docs', app, document);
   // ──────────────────────────────────────────────────────────────────────────
 
