@@ -2,6 +2,7 @@ import { Controller, Post, Body } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { LoginService } from './login.service';
 import { LoginDto } from './dto/login.dto';
+import { RegisterDto } from './dto/register.dto';
 
 @ApiTags('Auth')
 @Controller('auth')
@@ -14,5 +15,13 @@ export class LoginController {
     @ApiResponse({ status: 401, description: 'Credenciales inválidas.' })
     login(@Body() dto: LoginDto) {
         return this.loginService.login(dto);
+    }
+
+    @Post('register')
+    @ApiOperation({ summary: 'Registrar usuario', description: 'Crea un nuevo usuario en el sistema con username, email y contraseña.' })
+    @ApiResponse({ status: 201, description: 'Usuario registrado exitosamente.', schema: { example: { message: 'Usuario registrado exitosamente', usuario: { id: 1, username: 'john_doe', email: 'john@libero.com', idRol: 2, activo: true } } } })
+    @ApiResponse({ status: 409, description: 'El username o email ya está registrado.' })
+    register(@Body() dto: RegisterDto) {
+        return this.loginService.register(dto);
     }
 }

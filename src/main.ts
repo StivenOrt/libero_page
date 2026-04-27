@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
 import { NotFoundFilter } from './filters/notfound.filter';
+import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
@@ -20,6 +21,7 @@ async function bootstrap() {
   });
 
   app.useGlobalFilters(new NotFoundFilter());
+  app.useGlobalPipes(new ValidationPipe());
 
   // ── Swagger ────────────────────────────────────────────────────────────────
   const config = new DocumentBuilder()

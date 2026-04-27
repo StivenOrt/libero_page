@@ -1,9 +1,10 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import { UsersEntity } from '../users/entities/user.entity';
 import { LoginDto } from '../login/dto/login.dto';
+import { RegisterDto } from '../login/dto/register.dto';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
@@ -38,6 +39,39 @@ export class LoginService {
         username: usuario.username,
         email: usuario.email,
         idRol: usuario.idRol,
+      },
+    };
+  }
+
+  async register(dto: RegisterDto) {
+    const existe = await this.usuarioRepo.findOne({
+      where: [{ username: dto.username }, { email: dto.email }],
+    });
+
+    if (existe) {
+      throw new ConflictException('El username o email ya está registrado');
+    }
+
+    const passwordHash = await bcrypt.hash(dto.password, 10);
+
+    const nuevoUsuario = this.usuarioRepo.create({
+      username: dto.username,
+      email: dto.email,
+      passwordHash,
+      idRol: dto.idRol,
+      activo: dto.activo ?? true,
+    });
+
+    const guardado = await this.usuarioRepo.save(nuevoUsuario);
+
+    return {
+      message: 'Usuario registrado exitosamente',
+      usuario: {
+        id: guardado.id,
+        username: guardado.username,
+        email: guardado.email,
+        idRol: guardado.idRol,
+        activo: guardado.activo,
       },
     };
   }
