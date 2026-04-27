@@ -19,4 +19,7 @@ export class Postulacion {
 
   @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
   fecha: Date;
+
+  @Column()
+  createdById: number;
 }

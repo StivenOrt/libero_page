@@ -1,12 +1,11 @@
-import { Module} from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
-import { LoginModule } from './modules/login/login.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { PostulacionModule } from './modules/postulaciones/postulacion.module';
 import { UsersModule } from './modules/users/users.module';
 import { RoutesModule } from './routes/route.module';
+import { RolModule } from './modules/rols/rols.module';
 
 @Module({
   imports: [
@@ -15,12 +14,13 @@ import { RoutesModule } from './routes/route.module';
       envFilePath: '.env',
     }),
     DatabaseModule,
-    LoginModule,
+    AuthModule,
     PostulacionModule,
     UsersModule,
     RoutesModule,
+    RolModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [],
+  providers: [],
 })
 export class AppModule { }

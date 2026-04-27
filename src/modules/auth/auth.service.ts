@@ -2,18 +2,20 @@ import { Injectable, UnauthorizedException, ConflictException } from '@nestjs/co
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
 import { UsersEntity } from '../users/entities/user.entity';
-import { LoginDto } from '../login/dto/login.dto';
-import { RegisterDto } from '../login/dto/register.dto';
+import { LoginDto } from '../auth/dto/login.dto';
+import { RegisterDto } from '../auth/dto/register.dto';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
-export class LoginService {
+export class AuthService {
   constructor(
     @InjectRepository(UsersEntity)
     private readonly usuarioRepo: Repository<UsersEntity>,
     private readonly jwtService: JwtService,
-  ) { }
+    private readonly configService: ConfigService,
+  ) {}
 
   async login(dto: LoginDto) {
     const usuario = await this.usuarioRepo.findOne({
@@ -32,8 +34,12 @@ export class LoginService {
       idRol: usuario.idRol,
     };
 
+    const token = this.jwtService.sign(payload, {
+      secret: this.configService.get<string>('JWT_SECRET'),
+    });
+
     return {
-      access_token: this.jwtService.sign(payload),
+      access_token: token,
       usuario: {
         id: usuario.id,
         username: usuario.username,
@@ -48,9 +54,7 @@ export class LoginService {
       where: [{ username: dto.username }, { email: dto.email }],
     });
 
-    if (existe) {
-      throw new ConflictException('El username o email ya está registrado');
-    }
+    if (existe) throw new ConflictException('El username o email ya está registrado');
 
     const passwordHash = await bcrypt.hash(dto.password, 10);
 
