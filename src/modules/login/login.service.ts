@@ -2,8 +2,8 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
-import { UsersEntity } from '../entities/user.entity';
-import { LoginDto } from '../dto/login/login.dto';
+import { UsersEntity } from '../users/entities/user.entity';
+import { LoginDto } from '../login/dto/login.dto';
 import * as bcrypt from 'bcrypt';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class LoginService {
     @InjectRepository(UsersEntity)
     private readonly usuarioRepo: Repository<UsersEntity>,
     private readonly jwtService: JwtService,
-  ) {}
+  ) { }
 
   async login(dto: LoginDto) {
     const usuario = await this.usuarioRepo.findOne({

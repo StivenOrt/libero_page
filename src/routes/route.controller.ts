@@ -1,11 +1,11 @@
 import { Controller, Get, Res } from "@nestjs/common"
 import type { Response } from "express"
-import { RoutesService } from "../services/route.service"
+import { RoutesService } from "./route.service"
 
 @Controller()
 export class RoutesController {
 
-  constructor(private readonly RoutesService: RoutesService) {}
+  constructor(private readonly RoutesService: RoutesService) { }
 
   @Get()
   home(@Res() res: Response) {
