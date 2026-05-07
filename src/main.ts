@@ -47,8 +47,8 @@ async function bootstrap() {
   SwaggerModule.setup('api/docs', app, document);
   // ──────────────────────────────────────────────────────────────────────────
 
-  await app.listen(82);
-  console.log('NestJS corriendo en http://localhost:82');
-  console.log('Swagger UI disponible en http://localhost:82/api/docs');
+  await app.listen(85);
+  console.log('NestJS corriendo en http://localhost:85');
+  console.log('Swagger UI disponible en http://localhost:85/api/docs');
 }
 bootstrap();
