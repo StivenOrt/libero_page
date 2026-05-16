@@ -47,8 +47,9 @@ async function bootstrap() {
   SwaggerModule.setup('api/docs', app, document);
   // ──────────────────────────────────────────────────────────────────────────
 
-  await app.listen(85);
-  console.log('NestJS corriendo en http://localhost:85');
-  console.log('Swagger UI disponible en http://localhost:85/api/docs');
+  const PORT = process.env.PORT ?? "3000"
+  await app.listen(PORT);
+  console.log(`NestJS corriendo en http://localhost:${PORT}`);
+  console.log(`Swagger UI disponible en http://localhost:${PORT}/api/docs`);
 }
 bootstrap();
