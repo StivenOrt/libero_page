@@ -1,10 +1,10 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { NestExpressApplication } from '@nestjs/platform-express';
-import { join } from 'path';
-import { NotFoundFilter } from './filters/notfound.filter';
 import { ValidationPipe } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
+import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { join } from 'path';
+import { AppModule } from './app.module';
+import { NotFoundFilter } from './filters/notfound.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -23,7 +23,6 @@ async function bootstrap() {
   app.useGlobalFilters(new NotFoundFilter());
   app.useGlobalPipes(new ValidationPipe());
 
-  // ── Swagger ────────────────────────────────────────────────────────────────
   const config = new DocumentBuilder()
     .setTitle('Libero Page API')
     .setDescription('Documentación de la API REST del proyecto Libero Page')
@@ -45,7 +44,6 @@ async function bootstrap() {
     });
   });
   SwaggerModule.setup('api/docs', app, document);
-  // ──────────────────────────────────────────────────────────────────────────
 
   const PORT = process.env.PORT ?? "3000"
   await app.listen(PORT);
