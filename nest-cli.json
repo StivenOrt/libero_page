@@ -5,7 +5,15 @@
   "monorepo": true,
   "compilerOptions": {
     "webpack": true,
-    "tsConfigPath": "tsconfig.base.json"
+    "tsConfigPath": "tsconfig.base.json",
+    "assets": [
+      "mails/templates/**/*",
+      {
+        "include": "**/*.hbs"
+      },
+      "public/**/*"
+    ],
+    "watchAssets": true
   },
   "projects": {
     "libero": {
@@ -23,7 +31,14 @@
       "entryFile": "main",
       "sourceRoot": "apps/mailer/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/mailer/tsconfig.app.json"
+        "tsConfigPath": "apps/mailer/tsconfig.app.json",
+        "assets": [
+          {
+            "include": "../templates/**/*", 
+            "outDir": "./dist/templates",
+            "watchAssets": true
+          }
+        ]
       }
     }
   }

@@ -1,10 +1,10 @@
 import { NestFactory } from '@nestjs/core';
-import { MailerModule } from './mailer.module';
+import { MailModule } from './mailer.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices'
 
 async function bootstrap() {
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
-    MailerModule,
+    MailModule,
     {
       transport: Transport.TCP,
       options: {

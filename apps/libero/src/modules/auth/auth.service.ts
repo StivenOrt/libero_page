@@ -31,7 +31,8 @@ export class AuthService {
 
     const data = {
       code,
-      email: dto.email
+      email: dto.email,
+      username: usuario.username
     }
 
     this.client.emit('send_email', data)

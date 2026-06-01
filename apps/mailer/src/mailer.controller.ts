@@ -1,13 +1,13 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
-import { MailerService } from './mailer.service';
+import { MailService } from './mailer.service';
 
 @Controller()
 export class MailerController {
-  constructor(private readonly mailerService: MailerService) {}
+  constructor(private readonly mailerService: MailService) {}
 
   @MessagePattern('send_email')
   async handleSendEmail(@Payload() data) {
-    return await this.mailerService.send(data);
+    return await this.mailerService.sendCode(data);
   }
 }
