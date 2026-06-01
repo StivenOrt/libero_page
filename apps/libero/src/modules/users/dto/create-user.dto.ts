@@ -1,4 +1,4 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiHideProperty, ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { enumRole } from 'src/common/enums/rols.enum';
 
 export class CreateUserDto {
@@ -16,4 +16,7 @@ export class CreateUserDto {
 
   @ApiPropertyOptional({ description: 'Estado activo del usuario', example: true })
   activo?: boolean;
+
+  @ApiHideProperty()
+  code: string;
 }

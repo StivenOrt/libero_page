@@ -7,9 +7,21 @@ import { UsersModule } from '../users/users.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { RolModule } from '../roles/rol.module';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
   imports: [
+    ClientsModule.register([
+      {
+        name: 'MAILER',
+        transport: Transport.TCP,
+        options: {
+          host: '127.0.0.1',
+          port: 1111
+        }
+      }
+    ]),
+    
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.registerAsync({
       imports: [ConfigModule, UsersModule],

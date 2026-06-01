@@ -22,6 +22,9 @@ export class UsersEntity {
 	@Column({ type: 'boolean', default: true })
 	activo: boolean;
 
+	@Column({ name: 'code_hash', nullable: true  })
+	codeHash: string;
+
 	@CreateDateColumn({ name: 'created_at', type: 'timestamp' })
 	createdAt: Date;
 

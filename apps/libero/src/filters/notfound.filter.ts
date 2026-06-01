@@ -16,7 +16,9 @@ export class NotFoundFilter implements ExceptionFilter {
     const req = ctx.getRequest<Request>()
     const res = ctx.getResponse<Response>()
 
-    // si es API devolvemos JSON normal
+    console.log(req.url)
+    console.log(res.status)
+
     if (req.url.startsWith('/api')) {
       return res.status(404).json({
         statusCode: 404,

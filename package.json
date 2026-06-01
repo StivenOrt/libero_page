@@ -5,13 +5,14 @@
   "author": "",
   "private": true,
   "license": "UNLICENSED",
-
   "workspaces": [
     "apps/*"
   ],
   "scripts": {
     "main:start": "cd apps/libero && nest start",
-    "main:test": "cd apps/libero && nest start --watch"
+    "main:test": "cd apps/libero && nest start --watch",
+    "mailer:start": "cd apps/mailer && nest start",
+    "mailer:test": "cd apps/mailer && nest start --watch"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -19,6 +20,7 @@
     "@nestjs/core": "^11.0.1",
     "@nestjs/jwt": "^11.0.2",
     "@nestjs/mapped-types": "^2.1.0",
+    "@nestjs/microservices": "^11.1.24",
     "@nestjs/passport": "^11.0.5",
     "@nestjs/platform-express": "^11.0.1",
     "@nestjs/serve-static": "^5.0.4",

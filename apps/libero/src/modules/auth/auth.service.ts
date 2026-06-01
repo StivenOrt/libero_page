@@ -1,18 +1,42 @@
-import { Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
+import { Inject, Injectable, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { LoginDto } from './dto/login.dto';
 import { UsersService } from '../users/users.service';
+import { ClientProxy } from '@nestjs/microservices';
+import { requestCodeDto } from './dto/request-code.dto';
 
 @Injectable()
 export class AuthService {
   constructor(
+    @Inject('MAILER')
+    private client: ClientProxy,
+
     private readonly userService: UsersService,
 
     private readonly jwtService: JwtService,
     private readonly configService: ConfigService,
   ) {}
+
+
+  async requestCode(dto: requestCodeDto) {
+
+    const usuario = await this.userService.findOneEmail(dto.email)
+    if (!usuario) throw new NotFoundException('Usuario no encontrado')
+
+    const code = Math.floor( 100_000 + Math.random() * 900_000).toString()
+
+    await this.userService.update(usuario.id, { code })
+
+    const data = {
+      code,
+      email: dto.email
+    }
+
+    this.client.emit('send_email', data)
+  }
+
 
   async login(dto: LoginDto) {
 
@@ -23,8 +47,9 @@ export class AuthService {
     if (!usuario) throw new NotFoundException('Usuario no encontrado');
     if (!usuario.activo) throw new UnauthorizedException('Usuario inactivo');
 
-    const valid = await bcrypt.compare(dto.password, usuario.passwordHash);
-    if (!valid) throw new UnauthorizedException('Contraseña incorrecta');
+    const pass = dto.password ? await bcrypt.compare(dto.password, usuario.passwordHash) : null;
+    const code = dto.code ? await bcrypt.compare(dto.code, usuario.codeHash) : null;
+    if (!pass && !code) throw new UnauthorizedException('Credenciales incorrectas');
 
     const payload = {
       sub: usuario.id,

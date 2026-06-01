@@ -9,9 +9,7 @@ import { NotFoundFilter } from './filters/notfound.filter';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  app.setGlobalPrefix('api', {
-    exclude: ['/', 'login'],
-  });
+  app.setGlobalPrefix('api');
 
   app.enableCors();
 
@@ -20,7 +18,7 @@ async function bootstrap() {
     index: false,
   });
 
-  app.useGlobalFilters(new NotFoundFilter());
+  //app.useGlobalFilters(new NotFoundFilter());
   app.useGlobalPipes(new ValidationPipe());
 
   const config = new DocumentBuilder()

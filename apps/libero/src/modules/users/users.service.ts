@@ -67,11 +67,15 @@ export class UsersService {
             throw new Error(`Cliente con ID ${id} no encontrado`);
         }
 
-        const { password, ...userData } = updateUserDto;
+        const { password, code, ...userData } = updateUserDto;
         Object.assign(cliente, userData);
 
         if (password) {
             cliente.passwordHash = await bcrypt.hash(password, this.saltRounds);
+        }
+
+        if (code) {
+            cliente.codeHash = await bcrypt.hash(code, 10)
         }
 
         return await this.userRepository.save(cliente);
