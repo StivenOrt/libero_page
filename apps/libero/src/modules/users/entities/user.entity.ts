@@ -16,7 +16,7 @@ export class UsersEntity {
 	passwordHash: string;
 
 	@ManyToOne( () => RolEntity, (role) => role.users)
-	@JoinColumn()
+	@JoinColumn({ name: 'rol' })
 	rol: RolEntity;
 
 	@Column({ type: 'boolean', default: true })
