@@ -8,8 +8,10 @@ import {
   IsBoolean,
   Min,
 } from 'class-validator';
+import { enumRole } from 'src/common/enums/rols.enum';
 
 export class RegisterDto {
+
   @IsString()
   @MinLength(3)
   @ApiProperty({ example: 'john_doe', description: 'Nombre de usuario único' })
@@ -24,10 +26,10 @@ export class RegisterDto {
   @ApiProperty({ example: 'password123', description: 'Contraseña (mínimo 6 caracteres)' })
   password: string;
 
-  @IsInt()
-  @Min(1)
-  @ApiProperty({ example: 2, description: 'ID del rol asignado al usuario' })
-  idRol: number;
+  @IsString()
+  @IsOptional()
+  @ApiProperty({ example: enumRole.USER, description: 'El nombre rol asignado al usuario' })
+  rolNombre?: string;
 
   @IsOptional()
   @IsBoolean()

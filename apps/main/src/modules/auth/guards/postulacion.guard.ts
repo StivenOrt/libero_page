@@ -1,15 +1,9 @@
-import {
-  CanActivate,
-  ExecutionContext,
-  ForbiddenException,
-  Injectable,
-  NotFoundException,
-  UnauthorizedException,
-} from '@nestjs/common';
+import { CanActivate, ExecutionContext, ForbiddenException, Injectable,
+  NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Postulacion } from 'src/modules/postulaciones/entities/postulacion.entity';
-import { RolEnum } from 'src/common/enums/rols.enum';
+import { enumRole } from 'src/common/enums/rols.enum';
 
 @Injectable()
 export class PostulacionGuard implements CanActivate {
@@ -39,13 +33,7 @@ export class PostulacionGuard implements CanActivate {
       throw new NotFoundException('Postulacion no encontrada');
     }
 
-    if (
-      user.idRol === RolEnum.ADMIN ||
-      user.idRol === RolEnum.EDITOR ||
-      postulacion.createdById === user.sub
-    ) {
-      return true;
-    }
+    if ( user.idRol === enumRole.ADMIN || user.idRol === enumRole.EDITOR || postulacion.createdById === user.sub ) return true;
 
     throw new ForbiddenException('No tiene permisos para modificar esta postulacion');
   }

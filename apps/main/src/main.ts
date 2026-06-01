@@ -27,23 +27,10 @@ async function bootstrap() {
     .setTitle('Libero Page API')
     .setDescription('Documentación de la API REST del proyecto Libero Page')
     .setVersion('1.0')
-    .addBearerAuth(
-      {
-        type: 'http',
-        scheme: 'bearer',
-        bearerFormat: 'JWT',
-        description: 'Ingresa el token JWT obtenido en /api/auth/login',
-      },
-      'access-token',
-    )
     .build();
+    
     const document = SwaggerModule.createDocument(app, config);
-      Object.values(document.paths).forEach((path: any) => {
-      Object.values(path).forEach((method: any) => {
-      method.security = [{ 'access-token': [] }];
-    });
-  });
-  SwaggerModule.setup('api/docs', app, document);
+    SwaggerModule.setup('api/docs', app, document);
 
   const PORT = process.env.PORT ?? "3000"
   await app.listen(PORT);

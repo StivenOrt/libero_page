@@ -1,10 +1,5 @@
-import {
-	Column,
-	CreateDateColumn,
-	Entity,
-	PrimaryGeneratedColumn,
-	UpdateDateColumn,
-} from 'typeorm';
+import { RolEntity } from 'src/modules/roles/entities/rol.entity';
+import { Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity('usuarios')
 export class UsersEntity {
@@ -20,8 +15,9 @@ export class UsersEntity {
 	@Column({ name: 'password_hash', type: 'varchar', length: 255 })
 	passwordHash: string;
 
-	@Column({ name: 'id_rol', type: 'int' })
-	idRol: number;
+	@ManyToOne( () => RolEntity, (role) => role.users)
+	@JoinColumn()
+	rol: RolEntity;
 
 	@Column({ type: 'boolean', default: true })
 	activo: boolean;

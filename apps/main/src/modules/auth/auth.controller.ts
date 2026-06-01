@@ -17,11 +17,4 @@ export class AuthController {
         return this.authService.login(dto);
     }
 
-    @Post('register')
-    @ApiOperation({ summary: 'Registrar usuario', description: 'Crea un nuevo usuario en el sistema con username, email y contraseña.' })
-    @ApiResponse({ status: 201, description: 'Usuario registrado exitosamente.', schema: { example: { message: 'Usuario registrado exitosamente', usuario: { id: 1, username: 'john_doe', email: 'john@libero.com', idRol: 2, activo: true } } } })
-    @ApiResponse({ status: 409, description: 'El username o email ya está registrado.' })
-    register(@Body() dto: RegisterDto) {
-        return this.authService.register(dto);
-    }
 }

@@ -1,23 +1,22 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
-import { InjectRepository } from '@nestjs/typeorm';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { Repository } from 'typeorm';
-import { UsersEntity } from 'src/modules/users/entities/user.entity';
+import { UsersService } from 'src/modules/users/users.service';
 
 type JwtPayload = {
   sub: number;
   username: string;
-  idRol: number;
+  email: string;
+  rol: string;
 };
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
     configService: ConfigService,
-    @InjectRepository(UsersEntity)
-    private readonly usersRepository: Repository<UsersEntity>,
+
+    private readonly usersService: UsersService,
   ) {
     const jwtSecret = configService.get<string>('JWT_SECRET');
 
@@ -33,9 +32,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
   }
 
   async validate(payload: JwtPayload) {
-    const user = await this.usersRepository.findOne({
-      where: { id: payload.sub },
-    });
+
+    const user = await this.usersService.findOneEmail(payload.email);
 
     if (!user || !user.activo) {
       throw new UnauthorizedException('Usuario no autorizado');
@@ -44,7 +42,8 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     return {
       sub: user.id,
       username: user.username,
-      idRol: user.idRol,
+      email: user.email,
+      rol: user.rol,
     };
   }
 }

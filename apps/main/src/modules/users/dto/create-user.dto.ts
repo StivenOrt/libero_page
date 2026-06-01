@@ -1,4 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { enumRole } from 'src/common/enums/rols.enum';
 
 export class CreateUserDto {
   @ApiProperty({ description: 'Nombre de usuario único', example: 'juanperez' })
@@ -10,8 +11,8 @@ export class CreateUserDto {
   @ApiProperty({ description: 'Contraseña del usuario', example: '********' })
   password: string;
 
-  @ApiProperty({ description: 'ID del rol asignado', example: 1 })
-  idRol: number;
+  @ApiProperty({ description: 'Nombre del rol asignado', example: enumRole.USER })
+  rolNombre?: string;
 
   @ApiPropertyOptional({ description: 'Estado activo del usuario', example: true })
   activo?: boolean;
