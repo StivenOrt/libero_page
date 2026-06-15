@@ -3,10 +3,10 @@ name: CI
 on:
   push:
     branches:
-      - micro-services
+      - main
   pull_request:
     branches:
-      - micro-services
+      - main
 
 jobs:
   build:
